@@ -9,7 +9,7 @@ const createBookHTML = (book) => {
     </div>`;
 };
 
-const call = async function () {
+const asyncStuff = async function () {
   try {
     let DataFromUrl = await fetch("https://striveschool-api.herokuapp.com/books");
     console.log(DataFromUrl);
@@ -17,14 +17,14 @@ const call = async function () {
       let books = await DataFromUrl.json();
       console.log(books);
       let remainingBooks = books.length;
-      const threePartBooks = Math.ceil(remainingBooks / 3);
+      const threeBooks = Math.ceil(remainingBooks / 3);
       let col1 = document.getElementById("col1");
       let col2 = document.getElementById("col2");
       let col3 = document.getElementById("col3");
 
       for (let i = 0; i < remainingBooks; i++) {
         let book = books[i];
-        let column = i < threePartBooks ? col1 : i < 2 * threePartBooks ? col2 : col3;
+        let column = i < threeBooks ? col1 : i < 2 * threeBooks ? col2 : col3;
         column.innerHTML += createBookHTML(book);
       }
 
@@ -39,4 +39,4 @@ const call = async function () {
     console.log(error);
   }
 };
-call();
+asyncStuff();
